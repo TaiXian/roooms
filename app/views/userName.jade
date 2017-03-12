@@ -1,8 +1,13 @@
 mixin userName()
-  p You are user: #{userName}
   div
-    form(action='/signup',method='post')
+    form(action='/room/#{roomNumber}',method='post')
       div(data-role='fieldcontain')
         fieldset(data-role='controlgroup')
-          label(for='newUserName') newUserName
-          input(id='newUserName',type='text',name='userName')
+          label(for='newUserName') User Name:
+          input(id='newUserName',type='text', value='#{userName}' name='userName')
+      div(data-role='fieldcontain')
+        fieldset(data-role='controlgroup')
+          label(for='content') content:
+          input(id='content',type='content',value='',placeholder='',name='content')
+      div(data-role='fieldcontain')
+        input(type='submit',value='Sign Up',data-transition='fade', data-theme='c')

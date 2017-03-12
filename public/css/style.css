@@ -6,3 +6,16 @@ body {
 a {
   color: #00B7FF;
 }
+
+div.blue {
+  background-color: #DDFFFF;
+}
+
+div.message {
+  margin: 5px;
+  border: 1px solid;
+}
+div.message:last-child {
+  border-left: 6px solid #ccc;
+  border-color: #00B7FF;
+}
