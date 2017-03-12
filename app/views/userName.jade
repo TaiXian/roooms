@@ -1,0 +1,8 @@
+mixin userName()
+  p You are user: #{userName}
+  div
+    form(action='/signup',method='post')
+      div(data-role='fieldcontain')
+        fieldset(data-role='controlgroup')
+          label(for='newUserName') newUserName
+          input(id='newUserName',type='text',name='userName')
