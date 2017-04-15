@@ -58,7 +58,7 @@ function insertIntoDatabase(connection, userName, content, roomNumber, res){
             console.log(rowCount + ' row(s) inserted');
             res.render('room', {
               roomNumber: roomNumber,
-              userName: userName,
+              userName: validator.unescape(""+userName),
               messages: messageRows
             });
         }
