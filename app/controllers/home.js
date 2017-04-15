@@ -28,7 +28,7 @@ function queryDatabase(connection, roomNumber, res){
             console.log(rowCount + ' row(s) returned');
             res.render('room', {
               roomNumber: roomNumber,
-              userName: 'bandje',
+              userName: 'anon',
               messages: messageRows
             });
         }
