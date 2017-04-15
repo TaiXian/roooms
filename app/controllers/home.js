@@ -50,7 +50,9 @@ function queryDatabase(connection, roomNumber, res){
 function insertIntoDatabase(connection, userName, content, roomNumber, res){
     var messageRows = [];
     console.log("Inserting a brand new product into database...");
-    var query = "insert into messages (UserName, Content, RoomNumber) Values ('"+userName+"', '"+content+"', '"+roomNumber+"') Select * from messages where RoomNumber = " + roomNumber;
+    var query = "insert into messages (UserName, Content, RoomNumber) Values ('"
+    +validator.escape(userName)+"', '"+validator.escape(content)+"', '"
+    +validator.escape(roomNumber)+"') Select * from messages where RoomNumber = " + validator.escape(roomNumber);
     console.log(query);
     request = new Request(
         query,
@@ -58,7 +60,7 @@ function insertIntoDatabase(connection, userName, content, roomNumber, res){
             console.log(rowCount + ' row(s) inserted');
             res.render('room', {
               roomNumber: roomNumber,
-              userName: validator.unescape(""+userName),
+              userName: userName,
               messages: messageRows
             });
         }
@@ -103,9 +105,9 @@ router.post('/room/:number', function (req, res, next) {
           console.log(err)
       }
       else{
-      var userName = validator.escape(req.body.userName);
-      var content = validator.escape(req.body.content);
-      var roomNumber = validator.escape(req.params.number);
+      var userName = req.body.userName;
+      var content = req.body.content;
+      var roomNumber = req.params.number;
           insertIntoDatabase(connection, userName, content, roomNumber, res);
       }
   });
