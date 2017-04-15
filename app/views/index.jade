@@ -3,7 +3,13 @@ include message
 include userName
 
 block content
-  h1 Room # #{roomNumber}
-  for message in messages
-    +message(message)
-  +userName()
+  h1 Welcome to Rooom
+  p Pick a room to join
+  script.
+    var something = function(){
+      console.log('something');
+      window.location.href = '/room/'+ document.getElementById('roomName').value
+    }
+  div
+    input(value='', type='text', id='roomName')
+    button(onclick='something()') Click

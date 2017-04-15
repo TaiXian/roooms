@@ -1,0 +1,9 @@
+extends layout
+include message
+include userName
+
+block content
+  h1 Room # #{roomNumber}
+  for message in messages
+    +message(message)
+  +userName()

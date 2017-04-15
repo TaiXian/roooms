@@ -3,9 +3,9 @@
 
 function Message (message) {
   if(!message) message = {};
-  this.content = message.content || '';
-  this.user = message.user || '';
-  this.time = message.time || '';
+  this.content = message.Content || '';
+  this.user = message.UserName || '';
+  this.time = message.InsertTime || '';
   this.color = message.color || '';
 }
 
