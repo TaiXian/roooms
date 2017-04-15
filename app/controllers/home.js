@@ -66,7 +66,7 @@ function insertIntoDatabase(connection, userName, content, roomNumber, res){
     request.on('row', function(columns) {
         var message = {};
         columns.forEach(function(column) {
-            message[column.metadata.colName] = column.value;
+            message[column.metadata.colName] = validator.unescape(""+column.value);
         });
         messageRows.push(new Message(message));
     });
