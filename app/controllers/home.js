@@ -2,6 +2,8 @@ var express = require('express'),
   router = express.Router(),
   Message = require('../models/message');
 
+var validator = require('validator');
+
 var Connection = require('tedious').Connection;
 var Request = require('tedious').Request;
 
@@ -37,7 +39,7 @@ function queryDatabase(connection, roomNumber, res){
     request.on('row', function(columns) {
         var message = {};
         columns.forEach(function(column) {
-            message[column.metadata.colName] = column.value;
+            message[column.metadata.colName] = validator.unescape(""+column.value);
         });
         messageRows.push(new Message(message));
     });
@@ -101,7 +103,10 @@ router.post('/room/:number', function (req, res, next) {
           console.log(err)
       }
       else{
-          insertIntoDatabase(connection, req.body.userName, req.body.content, req.params.number, res);
+      var userName = validator.escape(req.body.userName);
+      var content = validator.escape(req.body.content);
+      var roomNumber = validator.escape(req.params.number);
+          insertIntoDatabase(connection, userName, content, roomNumber, res);
       }
   });
 });
